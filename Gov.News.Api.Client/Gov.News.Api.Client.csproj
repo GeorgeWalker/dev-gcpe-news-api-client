@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>Gcpe.News.Api.Client</RootNamespace>
+  </PropertyGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="autorest --input-file=&quot;$(SolutionDir)swagger.json&quot; --csharp --use-datetimeoffset --override-client-name=Client --namespace=Gov.News.Api --sync-methods=none&#xD;&#xA;REM --add-credentials" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
+  </ItemGroup>
+
+</Project>
