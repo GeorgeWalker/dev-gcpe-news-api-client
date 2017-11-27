@@ -77,5 +77,5 @@ dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH"
 
 # only push the package if the nuget key was set.
 if [ ! -z $NUGET_KEY ]; then
-  dotnet nuget push -k $NUGET_KEY $DOTNET_STARTUP_PROJECT/*.nupkg -s nuget.org --verbosity detailed
+  dotnet nuget push -k $NUGET_KEY $DOTNET_STARTUP_PROJECT/*.nupkg -s nuget.org
 fi
