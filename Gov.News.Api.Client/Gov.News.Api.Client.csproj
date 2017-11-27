@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="autorest --input-file=&quot;$(SolutionDir)swagger.json&quot; --csharp --use-datetimeoffset --override-client-name=Client --namespace=Gov.News.Api --sync-methods=none&#xD;&#xA;REM --add-credentials" />
+    <Exec Command="autorest --input-file=&quot;$(SolutionDir)swagger.json&quot; --csharp --use-datetimeoffset --override-client-name=Client --namespace=Gov.News.Api --sync-methods=none" />
   </Target>
 
   <ItemGroup>
