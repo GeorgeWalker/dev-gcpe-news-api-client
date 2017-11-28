@@ -73,7 +73,8 @@ done
 echo "---> Restoring application dependencies..."
 dotnet restore "$DOTNET_STARTUP_PROJECT" $RESTORE_OPTIONS
 echo "---> Publishing application..."
-dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH"
+set
+dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH" --version-suffix 1234
 
 # only push the package if the nuget key was set.
 if [ ! -z $NUGET_KEY ]; then
