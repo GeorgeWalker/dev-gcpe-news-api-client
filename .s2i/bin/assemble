@@ -73,8 +73,12 @@ done
 echo "---> Restoring application dependencies..."
 dotnet restore "$DOTNET_STARTUP_PROJECT" $RESTORE_OPTIONS
 echo "---> Publishing application..."
-set
-dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH" --version-suffix 1234
+
+# get the text after the last dash in the openshift build name.
+VERSION_SUFFIX=${OPENSHIFT_BUILD_NAME##*-} 
+
+dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH" --version-suffix $VERSION_SUFFIX
+
 
 # only push the package if the nuget key was set.
 if [ ! -z $NUGET_KEY ]; then
