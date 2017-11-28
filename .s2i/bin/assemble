@@ -75,13 +75,14 @@ dotnet restore "$DOTNET_STARTUP_PROJECT" $RESTORE_OPTIONS
 echo "---> Publishing application..."
 
 # get the text after the last dash in the openshift build name.
-VERSION_SUFFIX=${OPENSHIFT_BUILD_NAME##*-} 
-echo $VERSION_SUFFIX
-VERSION_SUFFIX=${VERSION_SUFFIX:1}
-echo $VERSION_SUFFIX
+BUILDNUMBER=${OPENSHIFT_BUILD_NAME##*-} 
 
-dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH" --version-suffix .$VERSION_SUFFIX
 
+if [ ! -z $VERSION_PREFIX ]; then
+  $VERSION_PREFIX=1.0.0
+fi
+
+dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH" /p:AssemblyVersion=$VERSION_PREFIX$BUILDNUMBER /p:FileVersion=$VERSION_PREFIX$BUILDNUMBER /p:PackageVersion=$VERSION_PREFIX$BUILDNUMBER
 
 # only push the package if the nuget key was set.
 if [ ! -z $NUGET_KEY ]; then
