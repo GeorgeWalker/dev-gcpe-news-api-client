@@ -76,8 +76,11 @@ echo "---> Publishing application..."
 
 # get the text after the last dash in the openshift build name.
 VERSION_SUFFIX=${OPENSHIFT_BUILD_NAME##*-} 
+echo $VERSION_SUFFIX
+VERSION_SUFFIX=${VERSION_SUFFIX:1}
+echo $VERSION_SUFFIX
 
-dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH" --version-suffix $VERSION_SUFFIX
+dotnet pack "$DOTNET_STARTUP_PROJECT" -o "$DOTNET_APP_PATH" --version-suffix .$VERSION_SUFFIX
 
 
 # only push the package if the nuget key was set.
